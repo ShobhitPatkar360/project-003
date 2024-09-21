@@ -10,7 +10,7 @@ In this project, I am going to deploy a node js application on kubernetes cluste
 
 ## Architecture
 
-![image.png](https://github.com/ShobhitPatkar360/cold-learning/blob/6e0af1388d59a9c8668ce14137e0e36e3e4cb38c/pic/project-003.drawio.png](https://github.com/ShobhitPatkar360/cold-learning/blob/6e0af1388d59a9c8668ce14137e0e36e3e4cb38c/pic/project-003.drawio.png)
+![This is our server-setup](https://github.com/ShobhitPatkar360/cold-learning/blob/6e0af1388d59a9c8668ce14137e0e36e3e4cb38c/pic/project-003.drawio.png](https://github.com/ShobhitPatkar360/cold-learning/blob/6e0af1388d59a9c8668ce14137e0e36e3e4cb38c/pic/project-003.drawio.png)
 
 ### Links
 
