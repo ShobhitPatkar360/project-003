@@ -17,5 +17,5 @@ or Run by docker compose
 
 test
 
-![This is our server-setup](https://github.com/ShobhitPatkar360/cold-learning/blob/6e0af1388d59a9c8668ce14137e0e36e3e4cb38c/pic/project-003.drawio.png)
+![This is our server-setup](https://github.com/ShobhitPatkar360/cold-learning/blob/3f969328a8010593ffada6ae875ec144a1d063a8/pic/project-003.png)
 
