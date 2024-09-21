@@ -1,8 +1,4 @@
-# Project-003 : CD/CI with Node Application
-
-## Title
-
-Deploying a node js application to kubernetes cluster
+# Project-003 : Deploying a node js application to kubernetes cluster
 
 ## Overview
 
