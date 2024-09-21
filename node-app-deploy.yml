@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-application-deployment
+  annotations: 
+    kubernetes.io/change-cause: "This is again latest  version" 
+spec:
+  minReadySeconds: 10 
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      name: node-app-pod
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: node-app-container
+        image: shubh360/nodejs-project-03:latest
