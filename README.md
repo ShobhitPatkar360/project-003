@@ -1,9 +1,5 @@
 # Project-003 : CD/CI with Node Application
 
-## Architecture
-
-![This is our server-setup](https://github.com/ShobhitPatkar360/cold-learning/blob/3f969328a8010593ffada6ae875ec144a1d063a8/pic/project-003.png)
-
 ## Title
 
 Deploying a node js application to kubernetes cluster
@@ -12,11 +8,9 @@ Deploying a node js application to kubernetes cluster
 
 In this project, I am going to deploy a node js application on kubernetes cluster. I will be using AWS as cloud service provider. First I will show how we can do the deployment manually then I will show how we can automate the deployment by using CD/CI pipeline. It means when once commit would be made to code in github then change would be reflected to our deployment.
 
-## Server setup
+## Architecture
 
-![image.png](Project-003%20d86768ac8e1a4c51979709ab0914a188/image.png)
-
-image link - [https://github.com/ShobhitPatkar360/cold-learning/blob/6e0af1388d59a9c8668ce14137e0e36e3e4cb38c/pic/project-003.drawio.png](https://github.com/ShobhitPatkar360/cold-learning/blob/6e0af1388d59a9c8668ce14137e0e36e3e4cb38c/pic/project-003.drawio.png)
+![image.png](https://github.com/ShobhitPatkar360/cold-learning/blob/6e0af1388d59a9c8668ce14137e0e36e3e4cb38c/pic/project-003.drawio.png](https://github.com/ShobhitPatkar360/cold-learning/blob/6e0af1388d59a9c8668ce14137e0e36e3e4cb38c/pic/project-003.drawio.png)
 
 ### Links
 
