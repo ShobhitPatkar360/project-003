@@ -17,9 +17,8 @@ In this project, I am going to deploy a node js application on kubernetes cluste
 - Kubernetes
 
 ## Presentation Video
-[![](https://github.com/ShobhitPatkar360/cold-learning/blob/bafcdb6483d0dce1b6340f78a151b9a96a7e1cae/pic/placeholder-001.png)](https://www.youtube.com/watch?v=u-YWtdbpEhQ&pp=ygUOd2hhdCBpcyBkb2NrZXI%3D)]
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=u-YWtdbpEhQ&pp=ygUOd2hhdCBpcyBkb2NrZXI%3D" title="YouTube Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![](https://github.com/ShobhitPatkar360/cold-learning/blob/bafcdb6483d0dce1b6340f78a151b9a96a7e1cae/pic/placeholder-001.png)](https://www.youtube.com/watch?v=u-YWtdbpEhQ&pp=ygUOd2hhdCBpcyBkb2NrZXI%3D)
 
 # Some helpful instructions
 
