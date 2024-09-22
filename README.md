@@ -16,6 +16,12 @@ In this project, I am going to deploy a node js application on kubernetes cluste
 - Docker
 - Kubernetes
 
+## Presentation Video
+
+[Presentation of Project](https://www.youtube.com/watch?v=u-YWtdbpEhQ&pp=ygUOd2hhdCBpcyBkb2NrZXI%3D)
+
+![Presentation of Project](https://www.youtube.com/watch?v=u-YWtdbpEhQ&pp=ygUOd2hhdCBpcyBkb2NrZXI%3D)
+
 # Some helpful instructions
 
 ## Installing software
@@ -42,7 +48,7 @@ sh 'kubectl get deploy && kubectl get svc'
 # for accessing the application <node-ip>:<node-port>
 ```
 
-## Working with Docker Image
+## Working with Dockerfile
 
 ```bash
 # Our base image
@@ -63,7 +69,7 @@ EXPOSE 8000
 CMD ["node","app.js"]
 ```
 
-## Working with Docker containers
+## Working with Docker images and containers
 
 ```bash
 # Removing docker container and image if any existing
