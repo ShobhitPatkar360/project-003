@@ -8,25 +8,6 @@ In this project, I am going to deploy a node js application on kubernetes cluste
 
 ![This is our server-setup](https://github.com/ShobhitPatkar360/cold-learning/blob/94fae9b915de54b0628b743ffa87e9ab4283edef/pic/project-003.png)
 
-### Links
-
-youtube link - [https://www.youtube.com/watch?v=nplH3BzKHPk&list=PLlfy9GnSVerRqYJgVYO0UiExj5byjrW8u&index=15](https://www.youtube.com/watch?v=nplH3BzKHPk&list=PLlfy9GnSVerRqYJgVYO0UiExj5byjrW8u&index=15) 
-
-website link - [https://www.trainwithshubham.com/blog/install-jenkins-on-aws](https://www.trainwithshubham.com/blog/install-jenkins-on-aws) 
-
-document link - https://docs.google.com/document/d/1qos4eUfY4vZojjnZLSGw8D3A46Yy2r42uiZPyPxL17A/edit?pli=1#heading=h.i7ldfo5cwnft 
-
-[https://docs.google.com/document/d/1qos4eUfY4vZojjnZLSGw8D3A46Yy2r42uiZPyPxL17A/edit?pli=1#heading=h.i7ldfo5cwnft](https://docs.google.com/document/d/1qos4eUfY4vZojjnZLSGw8D3A46Yy2r42uiZPyPxL17A/edit?pli=1#heading=h.i7ldfo5cwnft)
-
-github link - [https://github.com/LondheShubham153/node-todo-cicd](https://github.com/LondheShubham153/node-todo-cicd) 
-
-### Presentation
-
-- Create a [readme.md](http://readme.md) file to show presentation. It should have photos and video
-- Installation guide file
-- files folder
-- Basic knowledge file
-
 ### Technologies used
 
 - Git
@@ -35,23 +16,14 @@ github link - [https://github.com/LondheShubham153/node-todo-cicd](https://githu
 - Docker
 - Kubernetes
 
-## Problems
+# Some helpful instructions
 
-1. The repository already have the origin, there is a need to change the origin
-`git remote set-url origin [git@gitlab.com](mailto:git@gitlab.com):KodeKloud/repository-1.git`
-2. setting username was also the problem so id sat 
-`git config --global [user.name](http://user.name/) "Your Name"
-git config --global user.email "[your.email@example.com](mailto:your.email@example.com)"`
+## Installing software
 
-3. Error - Found multiple CRI endpoints on the host. Please define which one do you wish to use
-4. There is no external ip for my deployed service in kubernetes ( just retry). I  have to manually copy the worker node’s public ip address
-5. Login to docker hub using credentials
-6. Github webhook setup - Actually I was unaware about the greevy syntax of adding webhook and installation of github integration plugin
-7. 
+preferred link - [https://github.com/ShobhitPatkar360/cold-learning/blob/main/devops/intallation-guidance.md](https://github.com/ShobhitPatkar360/cold-learning/blob/main/devops/intallation-guidance.md) 
 
-# Instructions to do the tasks
 
-## Kubernetes
+## Working with Kubernetes
 
 ```bash
 # for deleting old deployment 
@@ -70,7 +42,7 @@ sh 'kubectl get deploy && kubectl get svc'
 # for accessing the application <node-ip>:<node-port>
 ```
 
-## Docker Image creating
+## Working with Docker Image
 
 ```bash
 # Our base image
@@ -91,7 +63,7 @@ EXPOSE 8000
 CMD ["node","app.js"]
 ```
 
-## Docker image setup
+## Working with Docker containers
 
 ```bash
 # Removing docker container and image if any existing
@@ -107,17 +79,114 @@ withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable:'
 	sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
   sh 'docker push shubh360/my-web:latest'
 ```
+## Manifest file to create node application deployment
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-application-deployment
+  annotations: 
+    kubernetes.io/change-cause: "This is again latest  version" 
+spec:
+  minReadySeconds: 10 
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      name: node-app-pod
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: node-app-container
+        image: shubh360/nodejs-project-03:latest
+```
 
-## Installing software
+## Manifest file to create our Nodeport Service
+```bash
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nodeport-service
+  labels:
+    name: nodeport-label
+spec:
+  selector:
+    app: myapp
+  type: NodePort
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 8000
+    nodePort: 30033 
+    protocol: TCP
+```
 
-preferred link - [https://github.com/ShobhitPatkar360/cold-learning/blob/main/devops/intallation-guidance.md](https://github.com/ShobhitPatkar360/cold-learning/blob/main/devops/intallation-guidance.md) 
-
-rough work
+## Our Pipeline code
 
 ```bash
-docker credentials
+pipeline {
+    agent { label 'agent2'}
 
-docker login -u shubh360
-dckr_pat_VlFE35lbwKBoUEN67PdmEsx9T1g
+    stages {
+        stage('Checkout Code') { // Descriptive stage name
+            steps {
+                checkout scmGit(
+                    branches: [[name: 'main']],
+                    extensions: [],
+                    userRemoteConfigs: [[url: 'https://github.com/ShobhitPatkar360/project-003.git']]
+                )
+            }
+        }
 
+        stage('Clean Workspace') { // Consistent capitalization
+            steps {
+                cleanWs() // Existing function for cleaning workspace
+            }
+        }
+
+        stage('Build Docker Image') { // Combined stages for clarity
+            steps {                
+                    echo 'Copying essential files to our workspace via git clone'
+                    sh 'git clone https://github.com/ShobhitPatkar360/project-003.git'
+
+                    echo 'Deleting image if any existing'
+                    sh 'docker rmi shubh360/nodejs-project-03:latest || true'
+
+                    echo 'Build image from docker file'
+                    sh 'docker build -t shubh360/nodejs-project-03:latest'                
+            }
+        }
+        
+        stage('Pushing image to DockerHub') {
+            steps {
+                echo 'Pushing the image to DockerHub'
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
+                    sh 'docker push shubh360/nodejs-project-03:latest'
+                }
+            }
+        }
+        stage('Deploying our Node.js Application') {
+            steps {
+                echo 'Deleting old deployment (if exists)'
+                sh 'kubectl delete deployment node-application-deployment || true'
+                
+                echo 'Creating latest deployment'
 ```
+## Problems
+
+1. The repository already have the origin, there is a need to change the origin
+`git remote set-url origin [git@gitlab.com](mailto:git@gitlab.com):KodeKloud/repository-1.git`
+2. setting username was also the problem so id sat 
+`git config --global [user.name](http://user.name/) "Your Name"
+git config --global user.email "[your.email@example.com](mailto:your.email@example.com)"`
+
+3. Error - Found multiple CRI endpoints on the host. Please define which one do you wish to use
+4. There is no external ip for my deployed service in kubernetes ( just retry). I  have to manually copy the worker node’s public ip address
+5. Login to docker hub using credentials
+6. Github webhook setup - Actually I was unaware about the groovy syntax of adding webhook and installation of github integration plugin
