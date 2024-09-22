@@ -186,10 +186,6 @@ pipeline {
 
 1. The repository already have the origin, there is a need to change the origin
 `git remote set-url origin [git@gitlab.com](mailto:git@gitlab.com):KodeKloud/repository-1.git`
-2. setting username was also the problem so id sat 
-`git config --global [user.name](http://user.name/) "Your Name"
-git config --global user.email "[your.email@example.com](mailto:your.email@example.com)"`
-
 3. Error - Found multiple CRI endpoints on the host. Please define which one do you wish to use
 4. There is no external ip for my deployed service in kubernetes ( just retry). I  have to manually copy the worker node’s public ip address
 5. Login to docker hub using credentials
